@@ -1,0 +1,92 @@
+# TapPass Pipeline: Regulated
+# Full compliance pipeline for financial services, healthcare, government.
+# All 49 steps. EU AI Act, GDPR, NIS2, DORA ready.
+
+categories:
+  before:
+    access_control:
+      on_detection: block
+      steps:
+        validate_input: {}
+        rate_limit:
+          max_calls: 30
+          window_seconds: 3600
+        budget_enforcement:
+          max_cost_usd: 50.0
+          window: daily
+
+    data_protection:
+      on_detection: block
+      steps:
+        detect_pii: {}
+        detect_secrets: {}
+        pii_tokenize: {}
+        detect_infra: {}
+        detect_business: {}
+        unicode_attack: {}
+
+    threat_detection:
+      on_detection: block
+      steps:
+        detect_injection:
+          threshold: 0.5  # lower threshold = more sensitive
+        detect_escalation: {}
+        detect_exfiltration: {}
+        detect_tool_poisoning: {}
+        detect_memory_poisoning: {}
+        detect_insider_threat: {}
+
+    classify_and_prepare:
+      on_detection: log
+      steps:
+        classify_data:
+          use_llm_judge: true  # LLM-assisted classification
+        tool_filter: {}
+        model_routing: {}
+
+  call:
+    route_and_execute:
+      on_detection: block
+      steps:
+        call_llm: {}
+        call_tool: {}
+        scan_tool_calls: {}
+        tool_permissions: {}
+        tool_constraints: {}
+        human_approval:
+          required_for:
+            - classification: RESTRICTED
+            - classification: CONFIDENTIAL
+            - tool: send_email
+            - tool: delete_*
+        forbidden_zones:
+          paths:
+            - /etc/shadow
+            - ~/.ssh/*
+            - ~/.aws/*
+
+  after:
+    response_safety:
+      on_detection: block  # block, not just redact
+      steps:
+        scan_output: {}
+        pii_restore: {}
+        verify_artifact:
+          protected_patterns:
+            - docker-compose*.yml
+            - Dockerfile*
+            - .github/workflows/**
+            - .env
+            - "*credentials*"
+        shell_bleed: {}
+        taint_check: {}
+        output_constraints: {}
+
+    tracking:
+      on_detection: log
+      steps:
+        cost_tracking: {}
+        loop_guard:
+          max_iterations: 15
+        debug_logging:
+          include_prompts: true  # for audit purposes

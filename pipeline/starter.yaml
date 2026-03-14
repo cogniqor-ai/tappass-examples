@@ -1,0 +1,40 @@
+# TapPass Pipeline: Starter
+# Minimal governance for development and internal tools.
+# ~11 steps. Low latency. Catches the obvious stuff.
+
+categories:
+  before:
+    access_control:
+      steps:
+        validate_input: {}
+        rate_limit:
+          max_calls: 100
+          window_seconds: 3600
+
+    data_protection:
+      on_detection: log   # log PII, don't block
+      steps:
+        detect_pii: {}
+        detect_secrets:
+          on_detection: block  # always block secrets
+
+    threat_detection:
+      on_detection: block
+      steps:
+        detect_injection:
+          threshold: 0.8  # high threshold = fewer false positives
+
+  call:
+    route_and_execute:
+      steps:
+        call_llm: {}
+
+  after:
+    response_safety:
+      on_detection: log
+      steps:
+        scan_output: {}
+
+    tracking:
+      steps:
+        cost_tracking: {}
