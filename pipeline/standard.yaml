@@ -1,66 +1,28 @@
 # TapPass Pipeline: Standard
 # Production-ready governance for most workloads.
-# ~37 steps. Blocks PII, injection, secrets. Full audit trail.
+# Blocks PII, injection, secrets. Full audit trail.
+#
+# Import: tappass pipelines import standard.yaml
 
-categories:
-  before:
-    access_control:
-      on_detection: block
-      steps:
-        validate_input: {}
-        rate_limit:
-          max_calls: 50
-          window_seconds: 3600
-        budget_enforcement:
-          max_cost_usd: 100.0
-          window: daily
+preset: standard
 
-    data_protection:
-      on_detection: block
-      steps:
-        detect_pii: {}
-        detect_secrets: {}
-        pii_tokenize: {}
-        detect_infra: {}
-        detect_business: {}
-        unicode_attack: {}
+overrides:
+  rate_limit:
+    max_calls: 50
+    window_seconds: 3600
 
-    threat_detection:
-      on_detection: block
-      steps:
-        detect_injection:
-          threshold: 0.6
-        detect_escalation: {}
-        detect_exfiltration: {}
+  budget_enforcement:
+    max_cost_usd: 100.0
+    window: daily
 
-    classify_and_prepare:
-      on_detection: log
-      steps:
-        classify_data: {}
-        tool_filter: {}
+  detect_injection:
+    threshold: 0.6
 
-  call:
-    route_and_execute:
-      on_detection: block
-      steps:
-        call_llm: {}
-        call_tool: {}
-        scan_tool_calls: {}
-        tool_permissions: {}
-        tool_constraints: {}
+  detect_pii:
+    on_detection: block
 
-  after:
-    response_safety:
-      on_detection: redact
-      steps:
-        scan_output: {}
-        pii_restore: {}
-        shell_bleed: {}
-        taint_check: {}
+  scan_output:
+    on_detection: redact
 
-    tracking:
-      on_detection: log
-      steps:
-        cost_tracking: {}
-        loop_guard:
-          max_iterations: 25
+  loop_guard:
+    max_iterations: 25

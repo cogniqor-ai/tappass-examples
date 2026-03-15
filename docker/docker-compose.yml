@@ -1,11 +1,11 @@
 services:
   # TapPass governance server
   tappass:
-    image: ghcr.io/tappass/tappass:latest
+    image: tappass/tappass:latest  # or build from source
     ports:
       - "9620:9620"
     environment:
-      TAPPASS_ADMIN_KEY: ${TAPPASS_ADMIN_KEY:-tp_admin_change_me}
+      TAPPASS_ADMIN_KEY: ${TAPPASS_ADMIN_KEY}  # set in .env file
       OPENAI_API_KEY: ${OPENAI_API_KEY}  # your real OpenAI key
     volumes:
       - tappass-data:/data

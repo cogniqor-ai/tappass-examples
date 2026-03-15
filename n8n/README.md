@@ -30,8 +30,7 @@ If TapPass runs on a different host (e.g. Docker), use that host's address:
 
 ```
 http://tappass:9620/v1          # Docker network
-http://10.0.1.50:9620/v1       # LAN IP
-https://tappass.internal/v1     # Internal DNS
+https://tappass.your-domain.com/v1  # Your own domain
 ```
 
 ### 3. Use the credential in AI nodes
@@ -77,7 +76,7 @@ If you run n8n and TapPass in Docker:
 # docker-compose.yml
 services:
   tappass:
-    image: ghcr.io/tappass/tappass:latest
+    image: tappass/tappass:latest
     ports:
       - "9620:9620"
     environment:

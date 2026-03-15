@@ -32,7 +32,6 @@ print("Content:", data["choices"][0]["message"]["content"][:200])
 tp = data.get("tappass", {})
 print(f"Blocked: {tp.get('blocked', False)}")
 print(f"Classification: {tp.get('classification', 'unknown')}")
-print(f"Steps run: {tp.get('steps_run', 0)}")
 
 
 # --- Report a tool execution ---

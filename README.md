@@ -78,12 +78,11 @@ Your Agent (any framework)
   v
 TapPass Gateway ── governance pipeline ──> LLM / Tool
   |
-  Before the LLM           The Call              After the LLM
-  ├─ validate input        ├─ call LLM/tool      ├─ scan output + DLP
-  ├─ detect PII/secrets    ├─ tool permissions    ├─ taint tracking
-  ├─ block injection       ├─ scan tool calls     ├─ cost tracking
-  ├─ classify data         ├─ human approval      └─ audit trail
-  └─ rate limiting         └─ capability token
+  Before               During              After
+  ├─ PII detection     ├─ LLM/tool call    ├─ Output scanning
+  ├─ Secret scanning   ├─ Permissions      ├─ Cost tracking
+  ├─ Injection block   ├─ Human approval   └─ Audit trail
+  └─ Classification    └─ Rate limiting
 ```
 
 ## Requirements

@@ -28,10 +28,10 @@ Add to `~/.zshrc` or `~/.bashrc`:
 
 ```bash
 # Governed Claude Code
-alias gclaude='ANTHROPIC_BASE_URL=http://tappass.internal ANTHROPIC_API_KEY=tp_... claude'
+alias gclaude='ANTHROPIC_BASE_URL=http://localhost:9620 ANTHROPIC_API_KEY=tp_... claude'
 
 # Governed Python
-alias gpython='OPENAI_BASE_URL=http://tappass.internal/v1 OPENAI_API_KEY=tp_... python'
+alias gpython='OPENAI_BASE_URL=http://localhost:9620/v1 OPENAI_API_KEY=tp_... python'
 ```
 
 ## Per-project .env

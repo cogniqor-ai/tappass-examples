@@ -22,4 +22,4 @@ curl http://localhost:9620/v1/chat/completions \
   }'
 ```
 
-The response includes standard OpenAI fields plus a `tappass` object with governance metadata (blocked, classification, steps_run, capability_token).
+The response includes standard OpenAI fields plus a `tappass` object with governance metadata.

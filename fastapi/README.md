@@ -24,8 +24,8 @@ curl -X POST http://localhost:8000/analyze \
   -H "Content-Type: application/json" \
   -d '{"text": "Our Q3 revenue was strong.", "question": "Summarize this."}'
 
-# Request with PII (will be redacted or blocked)
+# Request with PII (will be redacted or blocked by TapPass)
 curl -X POST http://localhost:8000/analyze \
   -H "Content-Type: application/json" \
-  -d '{"text": "John Smith, SSN 123-45-6789, earned $120k.", "question": "Summarize."}'
+  -d '{"text": "Send an email to jane.doe@example.com about her account balance of 42000 EUR.", "question": "Summarize."}'
 ```

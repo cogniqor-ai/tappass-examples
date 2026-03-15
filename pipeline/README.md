@@ -6,11 +6,11 @@ TapPass governance pipelines are configured via YAML. Each pipeline defines whic
 
 TapPass ships with three presets:
 
-| Preset | Steps | Use case |
-|--------|-------|----------|
-| `starter` | ~11 | Development, internal tools |
-| `standard` | ~37 | Production workloads |
-| `regulated` | All 49 | Financial services, healthcare, government |
+| Preset | Use case |
+|--------|----------|
+| `starter` | Development, internal tools |
+| `standard` | Production workloads |
+| `regulated` | Financial services, healthcare, government |
 
 ```bash
 # Apply a preset
