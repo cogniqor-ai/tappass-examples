@@ -6,7 +6,7 @@
 <p align="center">
   <a href="https://pypi.org/project/tappass/"><img src="https://img.shields.io/pypi/v/tappass?color=blue" alt="PyPI"></a>
   <a href="https://tappass.ai"><img src="https://img.shields.io/badge/docs-tappass.ai-blueviolet" alt="Docs"></a>
-  <a href="https://github.com/cogniqor-ai/tappass-examples/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-green" alt="License"></a>
+  <a href="https://github.com/tappass/tappass-examples/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-green" alt="License"></a>
 </p>
 
 ---
